@@ -54,6 +54,7 @@ function getResourceRecursively(resource, pageId, data) {
 }
 
 function findMatches(passengers, pilots, ships) {
+  let results = []
   let matchingPilotNames = [];
   let pilotToShipNames = {};
   let shipUrlsToNames = {}
@@ -104,10 +105,14 @@ function findMatches(passengers, pilots, ships) {
     if(pilotShips.length) {
       for(let l = 0; l < pilotShips.length; l++) {
         let currShip = pilotShips[l];
-        console.log(currPilot + " - " + currShip)
+        results.push(currPilot + " - " + currShip)
       }
     }
   }
+
+  return results;
 }
 
-findMatchingPilotsAndShips(10);
+module.exports = {
+  findMatchingPilotsAndShips: findMatchingPilotsAndShips
+}
