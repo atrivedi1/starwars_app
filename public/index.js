@@ -3,11 +3,11 @@ $(document).ready(function() {
     event.preventDefault()
     
     let capacity = $( "input:first" ).val();
-    let data = JSON.stringify(capacity);
+    let data = JSON.stringify({ capacity });
     
     postData('/', data)
-      .then((res) => {
-        console.log(res);
+      .then((matches) => {
+        appendData(matches)
       })
       .catch((err) => {
         console.log(err);
@@ -25,6 +25,15 @@ $(document).ready(function() {
     .then((res) => {
       return res.json()
     })
+  }
+
+  function appendData(matches) {
+    $("#pilot_ship_matches").empty();
+    
+    for(let i = 0; i < matches.length; i++) {
+      let match = matches[i];
+      $("#pilot_ship_matches").append(`<p>${match}</p`)
+    }
   }
 });
 
